@@ -1,5 +1,7 @@
-package baemin_backend.config.response.exception;
+package baemin_backend.util.exception;
 
+import baemin_backend.util.response.exception.BaseException;
+import baemin_backend.util.response.exception.BaseExceptionResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -7,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpServerErrorException;
 
-import static baemin_backend.config.response.ResponseStatus.*;
+import static baemin_backend.util.response.ResponseStatus.*;
 
 @Slf4j
 @RestControllerAdvice

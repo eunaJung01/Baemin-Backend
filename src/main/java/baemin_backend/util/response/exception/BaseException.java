@@ -1,6 +1,6 @@
-package baemin_backend.config.response.exception;
+package baemin_backend.util.response.exception;
 
-import baemin_backend.config.response.ResponseStatus;
+import baemin_backend.util.response.ResponseStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

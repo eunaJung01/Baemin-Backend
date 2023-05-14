@@ -1,11 +1,9 @@
-package baemin_backend.config.response;
+package baemin_backend.util.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
-
-import static baemin_backend.config.response.ResponseStatus.SUCCESS;
 
 @Getter
 @JsonPropertyOrder({"isSuccess", "code", "message", "result"})
@@ -22,9 +20,9 @@ public class BaseResponse<T> {
     private final T result;
 
     public BaseResponse(T result) {
-        this.isSuccess = SUCCESS.isSuccess();
-        this.code = SUCCESS.getCode();
-        this.message = SUCCESS.getMessage();
+        this.isSuccess = ResponseStatus.SUCCESS.isSuccess();
+        this.code = ResponseStatus.SUCCESS.getCode();
+        this.message = ResponseStatus.SUCCESS.getMessage();
         this.result = result;
     }
 
