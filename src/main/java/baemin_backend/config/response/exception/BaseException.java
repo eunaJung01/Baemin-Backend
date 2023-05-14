@@ -1,4 +1,4 @@
-package baemin_backend.config.response.error;
+package baemin_backend.config.response.exception;
 
 import baemin_backend.config.response.ResponseStatus;
 import lombok.AllArgsConstructor;
