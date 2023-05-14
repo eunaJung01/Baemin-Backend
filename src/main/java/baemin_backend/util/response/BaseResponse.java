@@ -1,5 +1,6 @@
 package baemin_backend.util.response;
 
+import baemin_backend.util.ResponseStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;

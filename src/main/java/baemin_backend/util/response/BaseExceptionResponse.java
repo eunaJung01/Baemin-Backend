@@ -1,6 +1,6 @@
-package baemin_backend.util.response.exception;
+package baemin_backend.util.response;
 
-import baemin_backend.util.response.ResponseStatus;
+import baemin_backend.util.ResponseStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package baemin_backend.util.response;
+package baemin_backend.util;
 
 import lombok.Getter;
 
