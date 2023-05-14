@@ -1,6 +1,6 @@
 package baemin_backend.util.exception;
 
-import baemin_backend.util.ResponseStatus;
+import baemin_backend.util.BaseResponseStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -8,6 +8,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public class BaseException extends Exception {
 
-    private ResponseStatus status;
+    private BaseResponseStatus status;
 
 }

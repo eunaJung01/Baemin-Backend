@@ -1,6 +1,5 @@
-package baemin_backend.util.response;
+package baemin_backend.util;
 
-import baemin_backend.util.ResponseStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -21,10 +20,17 @@ public class BaseResponse<T> {
     private final T result;
 
     public BaseResponse(T result) {
-        this.isSuccess = ResponseStatus.SUCCESS.isSuccess();
-        this.code = ResponseStatus.SUCCESS.getCode();
-        this.message = ResponseStatus.SUCCESS.getMessage();
+        this.isSuccess = BaseResponseStatus.SUCCESS.isSuccess();
+        this.code = BaseResponseStatus.SUCCESS.getCode();
+        this.message = BaseResponseStatus.SUCCESS.getMessage();
         this.result = result;
+    }
+
+    public BaseResponse(BaseResponseStatus status) {
+        this.isSuccess = status.isSuccess();
+        this.code = status.getCode();
+        this.message = status.getMessage();
+        this.result = null;
     }
 
 }

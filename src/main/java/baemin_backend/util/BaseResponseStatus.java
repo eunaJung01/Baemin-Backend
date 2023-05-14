@@ -3,7 +3,7 @@ package baemin_backend.util;
 import lombok.Getter;
 
 @Getter
-public enum ResponseStatus {
+public enum BaseResponseStatus {
 
     /**
      * 1000: 요청 성공
@@ -26,7 +26,7 @@ public enum ResponseStatus {
     private final int code;
     private final String message;
 
-    ResponseStatus(boolean isSuccess, int code, String message) {
+    BaseResponseStatus(boolean isSuccess, int code, String message) {
         this.isSuccess = isSuccess;
         this.code = code;
         this.message = message;
