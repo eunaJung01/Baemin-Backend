@@ -4,6 +4,7 @@ import baemin_backend.common.exception.base.BadRequestException;
 import baemin_backend.common.response.BaseResponse;
 import baemin_backend.common.exception.base.InternalServerErrorException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -26,11 +27,18 @@ public class BaseExceptionControllerAdvice {
     // 위와 동일 (return ResponseEntity<>)
     /*
     @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<BaseResponse<Object>> handle_CommonBadRequest(BadRequestException e) {
-        log.error("[handle_CommonBadRequest]", e);
+    public ResponseEntity<BaseResponse<Object>> handle_BadRequest(BadRequestException e) {
+        log.error("[handle_BadRequest]", e);
         return ResponseEntity.badRequest().body(new BaseResponse<>(e.getExceptionStatus()));
     }
      */
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(InternalServerErrorException.class)
+    public BaseResponse<Object> handle_InternalServerError(InternalServerErrorException e) {
+        log.error("[handle_InternalServerError]", e);
+        return new BaseResponse<>(e.getExceptionStatus());
+    }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(NoHandlerFoundException.class)
@@ -40,10 +48,10 @@ public class BaseExceptionControllerAdvice {
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler(InternalServerErrorException.class)
-    public BaseResponse<Object> handle_InternalServerError(InternalServerErrorException e) {
-        log.error("[handle_InternalServerError]", e);
-        return new BaseResponse<>(e.getExceptionStatus());
+    @ExceptionHandler(DataAccessException.class)
+    public BaseResponse<Object> handle_DataAccessException(DataAccessException e) {
+        log.error("[handle_DataAccessException]", e);
+        return new BaseResponse<>(DATABASE_ERROR);
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
