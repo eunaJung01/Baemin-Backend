@@ -9,8 +9,8 @@ public enum BaseExceptionResponseStatus implements BaseResponseStatus {
     /**
      * 2000: Request 오류 (BAD_REQUEST)
      */
-    URL_NOT_FOUND(2000, HttpStatus.BAD_REQUEST.value(), "유효하지 않은 URL 요청입니다."),
-    BAD_PARAMETER(2001, HttpStatus.BAD_REQUEST.value(), "유효하지 않은 Parameter 요청입니다."),
+    URL_NOT_FOUND(2000, HttpStatus.BAD_REQUEST.value(), "유효하지 않은 URL 입니다."),
+    BAD_PARAMETER(2001, HttpStatus.BAD_REQUEST.value(), "유효하지 않은 Parameter 입니다."),
 
     /**
      * 3000: Server, Database 오류 (INTERNAL_SERVER_ERROR)
