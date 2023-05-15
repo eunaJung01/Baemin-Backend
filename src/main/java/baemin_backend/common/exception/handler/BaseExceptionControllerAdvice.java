@@ -1,4 +1,4 @@
-package baemin_backend.common.exception.base.handler;
+package baemin_backend.common.exception.handler;
 
 import baemin_backend.common.exception.base.BadRequestException;
 import baemin_backend.common.response.BaseResponse;
@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import static baemin_backend.common.response.status.BaseExceptionResponseStatus.*;
@@ -20,7 +19,7 @@ public class BaseExceptionControllerAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BadRequestException.class)
     public BaseResponse<Object> handle_BadRequest(BadRequestException e) {
-        log.error("[handle_CommonBadRequest]", e);
+        log.error("[handle_BadRequest]", e);
         return new BaseResponse<>(e.getExceptionStatus());
     }
 
@@ -48,9 +47,9 @@ public class BaseExceptionControllerAdvice {
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler(InternalServerError.class)
-    public BaseResponse<Object> handle_InternalServerError(Exception e) {
-        log.error("[handle_InternalServerError]", e);
+    @ExceptionHandler(RuntimeException.class)
+    public BaseResponse<Object> handle_RuntimeException(Exception e) {
+        log.error("[handle_RuntimeException]", e);
         return new BaseResponse<>(SERVER_ERROR);
     }
 
