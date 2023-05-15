@@ -1,8 +1,8 @@
-package baemin_backend.util.exception.base.handler;
+package baemin_backend.common.exception.base.handler;
 
-import baemin_backend.util.exception.base.BadRequestException;
-import baemin_backend.util.BaseResponse;
-import baemin_backend.util.exception.base.InternalServerErrorException;
+import baemin_backend.common.exception.base.BadRequestException;
+import baemin_backend.common.response.BaseResponse;
+import baemin_backend.common.exception.base.InternalServerErrorException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
-import static baemin_backend.util.response_status.BaseExceptionResponseStatus.*;
+import static baemin_backend.common.response.status.BaseExceptionResponseStatus.*;
 
 @Slf4j
 @RestControllerAdvice

@@ -1,11 +1,11 @@
-package baemin_backend.util;
+package baemin_backend.common.response;
 
-import baemin_backend.util.response_status.BaseResponseStatus;
+import baemin_backend.common.response.status.BaseResponseStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
 
-import static baemin_backend.util.response_status.SuccessResponseStatus.*;
+import static baemin_backend.common.response.status.SuccessResponseStatus.*;
 
 @Getter
 @JsonPropertyOrder({"code", "status", "message", "result"})

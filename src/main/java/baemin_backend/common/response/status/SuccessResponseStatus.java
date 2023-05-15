@@ -1,4 +1,4 @@
-package baemin_backend.util.response_status;
+package baemin_backend.common.response.status;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

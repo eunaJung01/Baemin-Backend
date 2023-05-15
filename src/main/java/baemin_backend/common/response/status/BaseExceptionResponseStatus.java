@@ -1,6 +1,5 @@
-package baemin_backend.util.response_status;
+package baemin_backend.common.response.status;
 
-import baemin_backend.util.response_status.BaseResponseStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
