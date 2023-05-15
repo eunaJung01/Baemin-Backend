@@ -1,34 +1,48 @@
 package baemin_backend.util;
 
+import baemin_backend.util.response_status.BaseResponseStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
 
-@Getter
-@JsonPropertyOrder({"isSuccess", "code", "message", "result"})
-public class BaseResponse<T> {
+import static baemin_backend.util.response_status.SuccessResponseStatus.*;
 
-    @JsonProperty("isSuccess")
-    private final Boolean isSuccess;
+@Getter
+@JsonPropertyOrder({"code", "status", "message", "result"})
+public class BaseResponse<T> implements BaseResponseStatus {
 
     private final int code;
-
+    private final int status;
     private final String message;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private final T result;
 
+    @Override
+    public int getCode() {
+        return code;
+    }
+
+    @Override
+    public int getStatus() {
+        return status;
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
+    }
+
     public BaseResponse(T result) {
-        this.isSuccess = BaseResponseStatus.SUCCESS.isSuccess();
-        this.code = BaseResponseStatus.SUCCESS.getCode();
-        this.message = BaseResponseStatus.SUCCESS.getMessage();
+        this.code = SUCCESS.getCode();
+        this.status = SUCCESS.getStatus();
+        this.message = SUCCESS.getMessage();
         this.result = result;
     }
 
     public BaseResponse(BaseResponseStatus status) {
-        this.isSuccess = status.isSuccess();
         this.code = status.getCode();
+        this.status = status.getStatus();
         this.message = status.getMessage();
         this.result = null;
     }
