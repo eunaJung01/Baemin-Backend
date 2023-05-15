@@ -1,9 +1,9 @@
 package baemin_backend.common.exception.handler;
 
-import baemin_backend.common.exception.base.BadRequestException;
+import baemin_backend.common.exception.BadRequestException;
 import baemin_backend.common.response.BaseErrorResponse;
 import baemin_backend.common.response.BaseResponse;
-import baemin_backend.common.exception.base.InternalServerErrorException;
+import baemin_backend.common.exception.InternalServerErrorException;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.TypeMismatchException;
