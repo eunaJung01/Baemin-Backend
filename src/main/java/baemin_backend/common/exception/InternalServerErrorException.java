@@ -1,14 +1,14 @@
 package baemin_backend.common.exception;
 
-import baemin_backend.common.response.status.BaseResponseStatus;
+import baemin_backend.common.response.status.ResponseStatus;
 import lombok.Getter;
 
 @Getter
 public class InternalServerErrorException extends RuntimeException {
 
-    private final BaseResponseStatus exceptionStatus;
+    private final ResponseStatus exceptionStatus;
 
-    public InternalServerErrorException(BaseResponseStatus exceptionStatus) {
+    public InternalServerErrorException(ResponseStatus exceptionStatus) {
         super(exceptionStatus.getMessage());
         this.exceptionStatus = exceptionStatus;
     }

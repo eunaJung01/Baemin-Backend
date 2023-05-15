@@ -1,6 +1,6 @@
 package baemin_backend.common.response;
 
-import baemin_backend.common.response.status.BaseResponseStatus;
+import baemin_backend.common.response.status.ResponseStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import static baemin_backend.common.response.status.SuccessResponseStatus.*;
 
 @Getter
 @JsonPropertyOrder({"code", "status", "message", "result"})
-public class BaseResponse<T> implements BaseResponseStatus {
+public class BaseResponse<T> implements ResponseStatus {
 
     private final int code;
     private final int status;

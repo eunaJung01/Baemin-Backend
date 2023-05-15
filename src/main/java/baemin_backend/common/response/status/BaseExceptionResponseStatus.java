@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 @RequiredArgsConstructor
-public enum BaseExceptionResponseStatus implements BaseResponseStatus {
+public enum BaseExceptionResponseStatus implements ResponseStatus {
 
     /**
      * 2000: Request 오류 (BAD_REQUEST)
