@@ -3,11 +3,13 @@ package baemin_backend.src.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.lang.Nullable;
 
+@Getter
 @Setter
 @NoArgsConstructor
 public class PostUserRequest {
@@ -29,10 +31,14 @@ public class PostUserRequest {
     private String phoneNumber;
 
     @Nullable
-    @Length(max = 25, message = "nickName: 최대 {max}자리까지 가능합니다")
-    private String nickName;
+    @Length(max = 25, message = "nickname: 최대 {max}자리까지 가능합니다")
+    private String nickname;
 
     @Nullable
     private String profileImage;
+
+    public void resetPassword(String encodedPassword) {
+        this.password = encodedPassword;
+    }
 
 }
