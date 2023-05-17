@@ -1,4 +1,4 @@
-package baemin_backend.dto;
+package baemin_backend.dto.restaurant;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;

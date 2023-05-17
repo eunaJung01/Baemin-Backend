@@ -1,4 +1,4 @@
-package baemin_backend.dto;
+package baemin_backend.dto.user;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

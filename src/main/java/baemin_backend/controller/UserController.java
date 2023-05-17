@@ -2,8 +2,8 @@ package baemin_backend.controller;
 
 import baemin_backend.common.exception.UserException;
 import baemin_backend.common.response.BaseResponse;
-import baemin_backend.dto.PostUserRequest;
-import baemin_backend.dto.PostUserResponse;
+import baemin_backend.dto.user.PostUserRequest;
+import baemin_backend.dto.user.PostUserResponse;
 import baemin_backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

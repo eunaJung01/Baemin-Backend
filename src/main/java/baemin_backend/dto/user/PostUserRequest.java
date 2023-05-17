@@ -1,4 +1,4 @@
-package baemin_backend.dto;
+package baemin_backend.dto.user;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
