@@ -1,9 +1,9 @@
 spring:
   profiles:
     group:
-      "local": "localDB, devPort"
-      "dev": "devDB, devPort"
-      "prod": "prodDB, prodPort"
+      "local": "localDB, devPort, secret"
+      "dev": "devDB, devPort, secret"
+      "prod": "prodDB, prodPort, secret"
 
 ---
 
@@ -78,3 +78,14 @@ spring:
 
 server:
   port: 9001
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: "secret"
+
+secret:
+  jwt-secret-key: ${JWT_SECRET_KEY}
+  jwt-expired-in: ${JWT_EXPIRED_IN}
