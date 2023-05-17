@@ -1,7 +1,7 @@
-package baemin_backend.src.dao;
+package baemin_backend.dao;
 
-import baemin_backend.src.dto.GetCategoriesResponse;
-import baemin_backend.src.dto.GetRestaurantsResponse;
+import baemin_backend.dto.GetCategoriesResponse;
+import baemin_backend.dto.GetRestaurantsResponse;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 

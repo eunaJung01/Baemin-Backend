@@ -1,10 +1,10 @@
-package baemin_backend.src.controller;
+package baemin_backend.controller;
 
 import baemin_backend.common.exception.UserException;
 import baemin_backend.common.response.BaseResponse;
-import baemin_backend.src.dto.PostUserRequest;
-import baemin_backend.src.dto.PostUserResponse;
-import baemin_backend.src.service.UserService;
+import baemin_backend.dto.PostUserRequest;
+import baemin_backend.dto.PostUserResponse;
+import baemin_backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;

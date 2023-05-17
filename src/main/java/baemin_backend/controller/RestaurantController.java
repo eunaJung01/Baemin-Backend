@@ -1,9 +1,9 @@
-package baemin_backend.src.controller;
+package baemin_backend.controller;
 
 import baemin_backend.common.response.BaseResponse;
-import baemin_backend.src.dto.GetCategoriesResponse;
-import baemin_backend.src.dto.GetRestaurantsResponse;
-import baemin_backend.src.service.RestaurantService;
+import baemin_backend.dto.GetCategoriesResponse;
+import baemin_backend.dto.GetRestaurantsResponse;
+import baemin_backend.service.RestaurantService;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;

@@ -1,6 +1,6 @@
-package baemin_backend.src.dao;
+package baemin_backend.dao;
 
-import baemin_backend.src.dto.PostUserRequest;
+import baemin_backend.dto.PostUserRequest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;

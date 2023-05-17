@@ -1,8 +1,8 @@
-package baemin_backend.src.service;
+package baemin_backend.service;
 
-import baemin_backend.src.dao.RestaurantDao;
-import baemin_backend.src.dto.GetCategoriesResponse;
-import baemin_backend.src.dto.GetRestaurantsResponse;
+import baemin_backend.dto.GetCategoriesResponse;
+import baemin_backend.dao.RestaurantDao;
+import baemin_backend.dto.GetRestaurantsResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
