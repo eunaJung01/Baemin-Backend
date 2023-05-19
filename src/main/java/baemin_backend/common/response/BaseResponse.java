@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
 
-import static baemin_backend.common.response.status.SuccessResponseStatus.*;
+import static baemin_backend.common.response.status.BaseExceptionResponseStatus.SUCCESS;
 
 @Getter
 @JsonPropertyOrder({"code", "status", "message", "result"})

@@ -10,8 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import static baemin_backend.common.response.status.UserExceptionResponseStatus.DUPLICATE_EMAIL;
-import static baemin_backend.common.response.status.UserExceptionResponseStatus.DUPLICATE_NICKNAME;
+import static baemin_backend.common.response.status.BaseExceptionResponseStatus.DUPLICATE_EMAIL;
+import static baemin_backend.common.response.status.BaseExceptionResponseStatus.DUPLICATE_NICKNAME;
 
 @Slf4j
 @Service

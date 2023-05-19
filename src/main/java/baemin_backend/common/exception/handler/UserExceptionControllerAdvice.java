@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import static baemin_backend.common.response.status.UserExceptionResponseStatus.INVALID_USER_VALUE;
+import static baemin_backend.common.response.status.BaseExceptionResponseStatus.INVALID_USER_VALUE;
 
 @Slf4j
 //@Priority(0)

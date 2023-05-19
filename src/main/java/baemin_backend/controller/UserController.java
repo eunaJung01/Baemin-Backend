@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static baemin_backend.common.response.status.UserExceptionResponseStatus.INVALID_USER_VALUE;
+import static baemin_backend.common.response.status.BaseExceptionResponseStatus.INVALID_USER_VALUE;
 import static baemin_backend.util.BindingResultUtils.getErrorMessages;
 
 @Slf4j
