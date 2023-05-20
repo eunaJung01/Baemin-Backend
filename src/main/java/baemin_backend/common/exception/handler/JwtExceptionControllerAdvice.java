@@ -23,21 +23,21 @@ public class JwtExceptionControllerAdvice {
     @ExceptionHandler(JwtNoTokenException.class)
     public BaseErrorResponse handle_JwtNoTokenException(JwtNoTokenException e) {
         log.error("[handle_JwtNoTokenException]", e);
-        return new BaseErrorResponse(NO_TOKEN);
+        return new BaseErrorResponse(e.getExceptionStatus());
     }
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(JwtUnauthorizedTokenException.class)
     public BaseErrorResponse handle_JwtUnauthorizedTokenException(JwtUnauthorizedTokenException e) {
         log.error("[handle_JwtUnauthorizedTokenException]", e);
-        return new BaseErrorResponse(UNAUTHORIZED_TOKEN);
+        return new BaseErrorResponse(e.getExceptionStatus());
     }
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(JwtInvalidAccessTokenException.class)
     public BaseErrorResponse handle_JwtInvalidAccessTokenException(JwtInvalidAccessTokenException e) {
         log.error("[handle_JwtInvalidAccessTokenException]", e);
-        return new BaseErrorResponse(INVALID_ACCESS_TOKEN);
+        return new BaseErrorResponse(e.getExceptionStatus());
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
