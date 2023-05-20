@@ -14,12 +14,12 @@ import java.util.Date;
 public class JwtTokenProvider {
 
     @Value("${secret.jwt-secret-key}")
-    private String JWT_SECRET_KEY;
+    private static String JWT_SECRET_KEY;
 
     @Value("${secret.jwt-expired-in}")
-    private long JWT_EXPIRED_IN;
+    private static long JWT_EXPIRED_IN;
 
-    public String createToken(long userId) {
+    public static String createToken(long userId) {
         Claims claims = Jwts.claims().setSubject(String.valueOf(userId));
         Date now = new Date();
         Date validity = new Date(now.getTime() + JWT_EXPIRED_IN);
