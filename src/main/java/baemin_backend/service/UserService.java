@@ -2,6 +2,8 @@ package baemin_backend.service;
 
 import baemin_backend.common.exception.UserException;
 import baemin_backend.dao.UserDao;
+import baemin_backend.dto.user.PostLoginRequest;
+import baemin_backend.dto.user.PostLoginResponse;
 import baemin_backend.dto.user.PostUserRequest;
 import baemin_backend.dto.user.PostUserResponse;
 import baemin_backend.util.jwt.JwtTokenProvider;
@@ -41,7 +43,7 @@ public class UserService {
         long userId = userDao.createUser(postUserRequest);
 
         // TODO: 4. JWT 토큰 생성
-        String jwt = jwtTokenProvider.createToken(userId);
+        String jwt = JwtTokenProvider.createToken(postUserRequest.getEmail(), userId);
 
         return new PostUserResponse(userId, jwt);
     }

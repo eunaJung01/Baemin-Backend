@@ -2,7 +2,6 @@ package baemin_backend.util.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -21,10 +20,10 @@ public class JwtTokenProvider {
     @Value("${secret.jwt-expired-in}")
     private static long JWT_EXPIRED_IN;
 
-    public static String createToken(long userId) {
+    public static String createToken(String principal, long userId) {
         log.info("JWT key={}", JWT_SECRET_KEY);
 
-        Claims claims = Jwts.claims().setSubject(String.valueOf(userId));
+        Claims claims = Jwts.claims().setSubject(principal);
         Date now = new Date();
         Date validity = new Date(now.getTime() + JWT_EXPIRED_IN);
         SecretKey secretKey = Keys.hmacShaKeyFor(JWT_SECRET_KEY.getBytes(StandardCharsets.UTF_8));
