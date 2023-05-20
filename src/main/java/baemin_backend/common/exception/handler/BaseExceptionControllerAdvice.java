@@ -64,11 +64,11 @@ public class BaseExceptionControllerAdvice {
         return new BaseErrorResponse(DATABASE_ERROR);
     }
 
-//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-//    @ExceptionHandler(RuntimeException.class)
-//    public BaseErrorResponse handle_RuntimeException(Exception e) {
-//        log.error("[handle_RuntimeException]", e);
-//        return new BaseErrorResponse(SERVER_ERROR);
-//    }
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(RuntimeException.class)
+    public BaseErrorResponse handle_RuntimeException(Exception e) {
+        log.error("[handle_RuntimeException]", e);
+        return new BaseErrorResponse(SERVER_ERROR);
+    }
 
 }
