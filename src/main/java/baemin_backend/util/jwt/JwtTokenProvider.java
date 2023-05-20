@@ -15,29 +15,29 @@ import java.util.Date;
 public class JwtTokenProvider {
 
     @Value("${secret.jwt-secret-key}")
-    private static String JWT_SECRET_KEY;
+    private String JWT_SECRET_KEY;
 
     @Value("${secret.jwt-expired-in}")
-    private static long JWT_EXPIRED_IN;
+    private long JWT_EXPIRED_IN;
 
-    public static String createToken(String principal, long userId) {
+    public String createToken(String principal, long userId) {
         log.info("JWT key={}", JWT_SECRET_KEY);
 
         Claims claims = Jwts.claims().setSubject(principal);
         Date now = new Date();
         Date validity = new Date(now.getTime() + JWT_EXPIRED_IN);
-        SecretKey secretKey = Keys.hmacShaKeyFor(JWT_SECRET_KEY.getBytes(StandardCharsets.UTF_8));
+        SecretKey jwtSecretKey = Keys.hmacShaKeyFor(JWT_SECRET_KEY.getBytes(StandardCharsets.UTF_8));
 
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(now)
                 .setExpiration(validity)
                 .claim("userId", userId)
-                .signWith(secretKey, SignatureAlgorithm.HS256)
+                .signWith(jwtSecretKey, SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    public static boolean validateAccessToken(String accessToken) {
+    public boolean validateAccessToken(String accessToken) {
         try {
             Jws<Claims> claims = Jwts.parserBuilder()
                     .setSigningKey(JWT_SECRET_KEY).build()
@@ -50,7 +50,7 @@ public class JwtTokenProvider {
         }
     }
 
-    public static String getPrincipal(String token) {
+    public String getPrincipal(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(JWT_SECRET_KEY).build()
                 .parseClaimsJws(token)

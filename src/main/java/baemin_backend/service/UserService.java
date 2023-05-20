@@ -43,7 +43,7 @@ public class UserService {
         long userId = userDao.createUser(postUserRequest);
 
         // TODO: 4. JWT 토큰 생성
-        String jwt = JwtTokenProvider.createToken(postUserRequest.getEmail(), userId);
+        String jwt = jwtTokenProvider.createToken(postUserRequest.getEmail(), userId);
 
         return new PostUserResponse(userId, jwt);
     }
