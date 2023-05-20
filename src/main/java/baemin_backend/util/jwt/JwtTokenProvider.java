@@ -33,7 +33,7 @@ public class JwtTokenProvider {
                 .setIssuedAt(now)
                 .setExpiration(validity)
                 .claim("userId", userId)
-                .signWith(jwtSecretKey, SignatureAlgorithm.HS256)
+                .signWith(SignatureAlgorithm.HS256, JWT_SECRET_KEY)
                 .compact();
     }
 
@@ -46,6 +46,7 @@ public class JwtTokenProvider {
             return !claims.getBody().getExpiration().before(new Date());
 
         } catch (JwtException | IllegalArgumentException e) {
+            log.error("[JwtTokenProvider.validateAccessToken]", e);
             return false;
         }
     }
