@@ -18,8 +18,8 @@ public class RestaurantDao {
     }
 
     public List<GetCategoriesResponse> getCategories() {
-        String query = "select * from category where status='active'";
-        return this.jdbcTemplate.query(query,
+        String sql = "select * from category where status='active'";
+        return this.jdbcTemplate.query(sql, 
                 (rs, rowNum) -> new GetCategoriesResponse(
                         rs.getString("name")
                 ));
@@ -27,8 +27,8 @@ public class RestaurantDao {
 
     // TODO: paging, sortBy 구현 필요
     public List<GetRestaurantsResponse> getRestaurants(double minStar, double star, String search, String sortBy) {
-        String query = "select name, address, heart_count, star_rate from restaurant where status='active'";
-        return this.jdbcTemplate.query(query,
+        String sql = "select name, address, heart_count, star_rate from restaurant where status='active'";
+        return this.jdbcTemplate.query(sql, 
                 (rs, rowNum) -> new GetRestaurantsResponse(
                         rs.getString("name"),
                         rs.getString("address"),
@@ -39,8 +39,8 @@ public class RestaurantDao {
 
     // TODO: paging, sortBy, categoryId로 탐색 구현 필요
     public List<GetRestaurantsResponse> getRestaurantsByCategory(double minStar, int categoryId, double star, String search, String sortBy) {
-        String query = "select name, address, heart_count, star_rate from restaurant where status='active'";
-        return this.jdbcTemplate.query(query,
+        String sql = "select name, address, heart_count, star_rate from restaurant where status='active'";
+        return this.jdbcTemplate.query(sql, 
                 (rs, rowNum) -> new GetRestaurantsResponse(
                         rs.getString("name"),
                         rs.getString("address"),

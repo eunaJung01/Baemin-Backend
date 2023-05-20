@@ -24,15 +24,15 @@ public class UserDaoV3 {
     }
 
     public boolean hasDuplicateEmail(String email) {
-        String query = "select exists(select email from user where email=:email and status in ('active', 'dormant'))";
+        String sql = "select exists(select email from user where email=:email and status in ('active', 'dormant'))";
         Map<String, Object> param = Map.of("email", email);
-        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(query, param, boolean.class));
+        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(sql, param, boolean.class));
     }
 
     public boolean hasDuplicateNickName(String nickname) {
-        String query = "select exists(select email from user where nickname=:nickname and status in ('active', 'dormant'))";
+        String sql = "select exists(select email from user where nickname=:nickname and status in ('active', 'dormant'))";
         Map<String, Object> param = Map.of("nickname", nickname);
-        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(query, param, boolean.class));
+        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(sql, param, boolean.class));
     }
 
     public long createUserV3(PostUserRequest postUserRequest) {

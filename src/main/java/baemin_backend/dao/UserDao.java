@@ -22,24 +22,24 @@ public class UserDao {
     }
 
     public boolean hasDuplicateEmail(String email) {
-        String query = "select exists(select email from user where email=:email and status in ('active', 'dormant'))";
+        String sql = "select exists(select email from user where email=:email and status in ('active', 'dormant'))";
         Map<String, Object> param = Map.of("email", email);
-        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(query, param, boolean.class));
+        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(sql, param, boolean.class));
     }
 
     public boolean hasDuplicateNickName(String nickname) {
-        String query = "select exists(select email from user where nickname=:nickname and status in ('active', 'dormant'))";
+        String sql = "select exists(select email from user where nickname=:nickname and status in ('active', 'dormant'))";
         Map<String, Object> param = Map.of("nickname", nickname);
-        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(query, param, boolean.class));
+        return Boolean.TRUE.equals(jdbcTemplate.queryForObject(sql, param, boolean.class));
     }
 
     public long createUser(PostUserRequest postUserRequest) {
-        String query = "insert into user(email, password, phone_number, nickname, profile_image) " +
+        String sql = "insert into user(email, password, phone_number, nickname, profile_image) " +
                 "values(:email, :password, :phoneNumber, :nickname, :profileImage)";
 
         SqlParameterSource param = new BeanPropertySqlParameterSource(postUserRequest);
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        jdbcTemplate.update(query, param, keyHolder);
+        jdbcTemplate.update(sql, param, keyHolder);
 
         return Objects.requireNonNull(keyHolder.getKey()).longValue();
     }
