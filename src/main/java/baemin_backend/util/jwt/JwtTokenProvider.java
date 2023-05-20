@@ -2,6 +2,7 @@ package baemin_backend.util.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -35,6 +36,26 @@ public class JwtTokenProvider {
                 .claim("userId", userId)
                 .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
+    }
+
+    public static boolean validateAccessToken(String accessToken) {
+        try {
+            Jws<Claims> claims = Jwts.parserBuilder()
+                    .setSigningKey(JWT_SECRET_KEY).build()
+                    .parseClaimsJws(accessToken);
+
+            return !claims.getBody().getExpiration().before(new Date());
+
+        } catch (JwtException | IllegalArgumentException e) {
+            return false;
+        }
+    }
+
+    public static String getPrincipal(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(JWT_SECRET_KEY).build()
+                .parseClaimsJws(token)
+                .getBody().getSubject();
     }
 
 }
