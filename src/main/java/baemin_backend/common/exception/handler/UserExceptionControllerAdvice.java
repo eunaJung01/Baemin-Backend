@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import static baemin_backend.common.response.status.BaseExceptionResponseStatus.INVALID_USER_VALUE;
 
 @Slf4j
-//@Priority(0)
+@Priority(0)
 @RestControllerAdvice
 public class UserExceptionControllerAdvice {
 
