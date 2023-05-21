@@ -1,4 +1,4 @@
-package baemin_backend.common.exception.handler;
+package baemin_backend.common.exception_handler;
 
 import baemin_backend.common.exception.JwtExpiredTokenException;
 import baemin_backend.common.exception.JwtInvalidAccessTokenException;
