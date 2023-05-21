@@ -1,6 +1,5 @@
 package baemin_backend.common.response.status;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
@@ -26,7 +25,7 @@ public enum BaseExceptionResponseStatus implements ResponseStatus {
     DATABASE_ERROR(3001, HttpStatus.INTERNAL_SERVER_ERROR.value(), "데이터베이스에서 오류가 발생하였습니다."),
 
     /**
-     * 4000: Authorization, Login 오류
+     * 4000: Authorization 오류
      */
     JWT_ERROR(4000, HttpStatus.INTERNAL_SERVER_ERROR.value(), "JWT에서 오류가 발생하였습니다."),
     TOKEN_NOT_FOUND(4001, HttpStatus.BAD_REQUEST.value(), "토큰이 HTTP Header에 없습니다."),
