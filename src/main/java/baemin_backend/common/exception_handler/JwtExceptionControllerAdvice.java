@@ -1,9 +1,6 @@
 package baemin_backend.common.exception_handler;
 
-import baemin_backend.common.exception.jwt.JwtExpiredTokenException;
-import baemin_backend.common.exception.jwt.JwtInvalidAccessTokenException;
-import baemin_backend.common.exception.jwt.JwtNoTokenException;
-import baemin_backend.common.exception.jwt.JwtUnauthorizedTokenException;
+import baemin_backend.common.exception.jwt.*;
 import baemin_backend.common.response.BaseErrorResponse;
 import io.jsonwebtoken.JwtException;
 import jakarta.annotation.Priority;
@@ -21,30 +18,16 @@ import static baemin_backend.common.response.status.BaseExceptionResponseStatus.
 public class JwtExceptionControllerAdvice {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(JwtNoTokenException.class)
-    public BaseErrorResponse handle_JwtNoTokenException(JwtNoTokenException e) {
-        log.error("[handle_JwtNoTokenException]", e);
-        return new BaseErrorResponse(e.getExceptionStatus());
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(JwtExpiredTokenException.class)
-    public BaseErrorResponse handle_JwtExpiredTokenException(JwtExpiredTokenException e) {
-        log.error("[handle_JwtExpiredTokenException]", e);
+    @ExceptionHandler({JwtNoTokenException.class, JwtUnsupportedTokenException.class})
+    public BaseErrorResponse handle_JwtBadRequestException(JwtNoTokenException e) {
+        log.error("[handle_JwtBadRequestException]", e);
         return new BaseErrorResponse(e.getExceptionStatus());
     }
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @ExceptionHandler(JwtUnauthorizedTokenException.class)
-    public BaseErrorResponse handle_JwtUnauthorizedTokenException(JwtUnauthorizedTokenException e) {
-        log.error("[handle_JwtUnauthorizedTokenException]", e);
-        return new BaseErrorResponse(e.getExceptionStatus());
-    }
-
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @ExceptionHandler(JwtInvalidAccessTokenException.class)
-    public BaseErrorResponse handle_JwtInvalidAccessTokenException(JwtInvalidAccessTokenException e) {
-        log.error("[handle_JwtInvalidAccessTokenException]", e);
+    @ExceptionHandler({JwtExpiredTokenException.class, JwtInvalidTokenException.class, JwtMalformedTokenException.class, JwtUnauthorizedTokenException.class})
+    public BaseErrorResponse handle_JwtUnauthorizedException(JwtUnauthorizedTokenException e) {
+        log.error("[handle_JwtUnauthorizedException]", e);
         return new BaseErrorResponse(e.getExceptionStatus());
     }
 

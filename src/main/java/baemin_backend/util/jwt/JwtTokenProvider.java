@@ -1,6 +1,8 @@
 package baemin_backend.util.jwt;
 
-import baemin_backend.common.exception.jwt.JwtExpiredTokenException;
+import baemin_backend.common.exception.jwt.JwtInvalidTokenException;
+import baemin_backend.common.exception.jwt.JwtMalformedTokenException;
+import baemin_backend.common.exception.jwt.JwtUnsupportedTokenException;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-import static baemin_backend.common.response.status.BaseExceptionResponseStatus.EXPIRED_TOKEN;
+import static baemin_backend.common.response.status.BaseExceptionResponseStatus.*;
 
 @Slf4j
 @Component
@@ -44,11 +46,17 @@ public class JwtTokenProvider {
             return claims.getBody().getExpiration().before(new Date());
 
         } catch (ExpiredJwtException e) {
-            throw new JwtExpiredTokenException(EXPIRED_TOKEN);
-
-        } catch (JwtException | IllegalArgumentException e) {
-            log.error("[JwtTokenProvider.validateAccessToken]", e);
             return true;
+
+        } catch (UnsupportedJwtException e) {
+            throw new JwtUnsupportedTokenException(UNSUPPORTED_TOKEN_TYPE);
+        } catch (MalformedJwtException e) {
+            throw new JwtMalformedTokenException(MALFORMED_TOKEN);
+        } catch (IllegalArgumentException e) {
+            throw new JwtInvalidTokenException(INVALID_TOKEN);
+        } catch (JwtException e) {
+            log.error("[JwtTokenProvider.validateAccessToken]", e);
+            throw e;
         }
     }
 

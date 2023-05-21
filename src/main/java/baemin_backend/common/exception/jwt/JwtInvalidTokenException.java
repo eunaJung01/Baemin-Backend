@@ -4,11 +4,11 @@ import baemin_backend.common.response.status.ResponseStatus;
 import lombok.Getter;
 
 @Getter
-public class JwtException extends RuntimeException {
+public class JwtInvalidTokenException extends RuntimeException {
 
     private final ResponseStatus exceptionStatus;
 
-    public JwtException(ResponseStatus exceptionStatus) {
+    public JwtInvalidTokenException(ResponseStatus exceptionStatus) {
         super(exceptionStatus.getMessage());
         this.exceptionStatus = exceptionStatus;
     }

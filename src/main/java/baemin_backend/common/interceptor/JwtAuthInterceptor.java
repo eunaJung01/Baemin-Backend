@@ -1,9 +1,6 @@
 package baemin_backend.common.interceptor;
 
-import baemin_backend.common.exception.jwt.JwtException;
-import baemin_backend.common.exception.jwt.JwtInvalidAccessTokenException;
-import baemin_backend.common.exception.jwt.JwtNoTokenException;
-import baemin_backend.common.exception.jwt.JwtUnauthorizedTokenException;
+import baemin_backend.common.exception.jwt.*;
 import baemin_backend.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -52,23 +49,23 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
             throw new JwtNoTokenException(TOKEN_NOT_FOUND);
         }
         if (!token.startsWith(JWT_TOKEN_PREFIX)) {
-            throw new JwtUnauthorizedTokenException(UNAUTHORIZED_TOKEN);
+            throw new JwtUnsupportedTokenException(UNSUPPORTED_TOKEN_TYPE);
         }
     }
 
     private void validateAccessToken(String accessToken) {
         if (jwtTokenProvider.isExpiredToken(accessToken)) {
-            throw new JwtUnauthorizedTokenException(UNAUTHORIZED_TOKEN);
+            throw new JwtExpiredTokenException(EXPIRED_TOKEN);
         }
     }
 
     private void validatePayload(String email, long userId) {
         if (email == null || userId == 0) {
-            throw new JwtInvalidAccessTokenException(INVALID_ACCESS_TOKEN);
+            throw new JwtInvalidTokenException(INVALID_TOKEN);
         }
         long userIdByEmail = userService.findUserIdByEmail(email);
         if (userId != userIdByEmail) {
-            throw new JwtException(TOKEN_MISMATCH);
+            throw new JwtUnauthorizedTokenException(TOKEN_MISMATCH);
         }
     }
 
