@@ -1,14 +1,14 @@
 package baemin_backend.util.jwt;
 
+import baemin_backend.common.exception.JwtExpiredTokenException;
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.crypto.SecretKey;
-import java.nio.charset.StandardCharsets;
 import java.util.Date;
+
+import static baemin_backend.common.response.status.BaseExceptionResponseStatus.EXPIRED_TOKEN;
 
 @Slf4j
 @Component
@@ -26,7 +26,6 @@ public class JwtTokenProvider {
         Claims claims = Jwts.claims().setSubject(principal);
         Date now = new Date();
         Date validity = new Date(now.getTime() + JWT_EXPIRED_IN);
-        SecretKey jwtSecretKey = Keys.hmacShaKeyFor(JWT_SECRET_KEY.getBytes(StandardCharsets.UTF_8));
 
         return Jwts.builder()
                 .setClaims(claims)
@@ -37,17 +36,19 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    public boolean validateAccessToken(String accessToken) {
+    public boolean isExpiredToken(String token) {
         try {
             Jws<Claims> claims = Jwts.parserBuilder()
                     .setSigningKey(JWT_SECRET_KEY).build()
-                    .parseClaimsJws(accessToken);
+                    .parseClaimsJws(token);
+            return claims.getBody().getExpiration().before(new Date());
 
-            return !claims.getBody().getExpiration().before(new Date());
+        } catch (ExpiredJwtException e) {
+            throw new JwtExpiredTokenException(EXPIRED_TOKEN);
 
         } catch (JwtException | IllegalArgumentException e) {
             log.error("[JwtTokenProvider.validateAccessToken]", e);
-            return false;
+            return true;
         }
     }
 
@@ -56,6 +57,13 @@ public class JwtTokenProvider {
                 .setSigningKey(JWT_SECRET_KEY).build()
                 .parseClaimsJws(token)
                 .getBody().getSubject();
+    }
+
+    public long getUserId(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(JWT_SECRET_KEY).build()
+                .parseClaimsJws(token)
+                .getBody().get("userId", Long.class);
     }
 
 }

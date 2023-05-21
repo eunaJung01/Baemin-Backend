@@ -1,5 +1,6 @@
 package baemin_backend.common.exception.handler;
 
+import baemin_backend.common.exception.JwtExpiredTokenException;
 import baemin_backend.common.exception.JwtInvalidAccessTokenException;
 import baemin_backend.common.exception.JwtNoTokenException;
 import baemin_backend.common.exception.JwtUnauthorizedTokenException;
@@ -23,6 +24,13 @@ public class JwtExceptionControllerAdvice {
     @ExceptionHandler(JwtNoTokenException.class)
     public BaseErrorResponse handle_JwtNoTokenException(JwtNoTokenException e) {
         log.error("[handle_JwtNoTokenException]", e);
+        return new BaseErrorResponse(e.getExceptionStatus());
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(JwtExpiredTokenException.class)
+    public BaseErrorResponse handle_JwtExpiredTokenException(JwtExpiredTokenException e) {
+        log.error("[handle_JwtExpiredTokenException]", e);
         return new BaseErrorResponse(e.getExceptionStatus());
     }
 
