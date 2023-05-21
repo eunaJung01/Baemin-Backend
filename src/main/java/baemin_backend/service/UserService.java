@@ -12,8 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import static baemin_backend.common.response.status.BaseExceptionResponseStatus.DUPLICATE_EMAIL;
-import static baemin_backend.common.response.status.BaseExceptionResponseStatus.DUPLICATE_NICKNAME;
+import static baemin_backend.common.response.status.BaseExceptionResponseStatus.*;
 
 @Slf4j
 @Service
@@ -46,6 +45,29 @@ public class UserService {
         String jwt = jwtTokenProvider.createToken(postUserRequest.getEmail(), userId);
 
         return new PostUserResponse(userId, jwt);
+    }
+
+    public long findUserIdByEmail(String email) {
+        return userDao.findUserIdByEmail(email);
+    }
+
+    public PostLoginResponse login(PostLoginRequest postLoginRequest, long userId) {
+        log.info("[UserService.login]");
+
+        // TODO: 1. 비밀번호 일치 확인
+        validatePassword(postLoginRequest.getPassword(), userId);
+
+        // TODO: 2. JWT 갱신
+        String updatedJwt = jwtTokenProvider.createToken(postLoginRequest.getEmail(), userId);
+
+        return new PostLoginResponse(userId, updatedJwt);
+    }
+
+    private void validatePassword(String password, long userId) {
+        String encodedPassword = userDao.getPasswordByUserId(userId);
+        if (!passwordEncoder.matches(password, encodedPassword)) {
+            throw new UserException(PASSWORD_NO_MATCH);
+        }
     }
 
 }

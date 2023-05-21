@@ -1,10 +1,13 @@
 package baemin_backend.controller;
 
+import baemin_backend.common.argument_resolver.PreAuthorize;
 import baemin_backend.common.exception.UserException;
 import baemin_backend.common.response.BaseResponse;
+import baemin_backend.dto.user.PostLoginResponse;
 import baemin_backend.dto.user.PostUserRequest;
 import baemin_backend.dto.user.PostUserResponse;
 import baemin_backend.service.UserService;
+import baemin_backend.dto.user.PostLoginRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
@@ -32,6 +35,16 @@ public class UserController {
             throw new UserException(INVALID_USER_VALUE, getErrorMessages(bindingResult));
         }
         return new BaseResponse<>(userService.createUser(postUserRequest));
+    }
+
+    @PostMapping("/login")
+    public BaseResponse<PostLoginResponse> login(@Validated @RequestBody PostLoginRequest postLoginRequest, BindingResult bindingResult,
+                                                 @PreAuthorize long userId) {
+        log.info("[UserController.login] userId={}", userId);
+        if (bindingResult.hasErrors()) {
+            throw new UserException(INVALID_USER_VALUE, getErrorMessages(bindingResult));
+        }
+        return new BaseResponse<>(userService.login(postLoginRequest, userId));
     }
 
 }
