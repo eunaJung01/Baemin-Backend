@@ -1,6 +1,6 @@
 package baemin_backend.util.jwt;
 
-import baemin_backend.common.exception.JwtExpiredTokenException;
+import baemin_backend.common.exception.jwt.JwtExpiredTokenException;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

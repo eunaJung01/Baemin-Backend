@@ -1,6 +1,9 @@
 package baemin_backend.common.interceptor;
 
-import baemin_backend.common.exception.*;
+import baemin_backend.common.exception.jwt.JwtException;
+import baemin_backend.common.exception.jwt.JwtInvalidAccessTokenException;
+import baemin_backend.common.exception.jwt.JwtNoTokenException;
+import baemin_backend.common.exception.jwt.JwtUnauthorizedTokenException;
 import baemin_backend.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

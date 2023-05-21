@@ -1,9 +1,9 @@
 package baemin_backend.common.exception_handler;
 
-import baemin_backend.common.exception.JwtExpiredTokenException;
-import baemin_backend.common.exception.JwtInvalidAccessTokenException;
-import baemin_backend.common.exception.JwtNoTokenException;
-import baemin_backend.common.exception.JwtUnauthorizedTokenException;
+import baemin_backend.common.exception.jwt.JwtExpiredTokenException;
+import baemin_backend.common.exception.jwt.JwtInvalidAccessTokenException;
+import baemin_backend.common.exception.jwt.JwtNoTokenException;
+import baemin_backend.common.exception.jwt.JwtUnauthorizedTokenException;
 import baemin_backend.common.response.BaseErrorResponse;
 import io.jsonwebtoken.JwtException;
 import jakarta.annotation.Priority;

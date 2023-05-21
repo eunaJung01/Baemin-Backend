@@ -1,14 +1,14 @@
-package baemin_backend.common.exception;
+package baemin_backend.common.exception.jwt;
 
 import baemin_backend.common.response.status.ResponseStatus;
 import lombok.Getter;
 
 @Getter
-public class JwtException extends RuntimeException {
+public class JwtUnauthorizedTokenException extends RuntimeException {
 
     private final ResponseStatus exceptionStatus;
 
-    public JwtException(ResponseStatus exceptionStatus) {
+    public JwtUnauthorizedTokenException(ResponseStatus exceptionStatus) {
         super(exceptionStatus.getMessage());
         this.exceptionStatus = exceptionStatus;
     }
