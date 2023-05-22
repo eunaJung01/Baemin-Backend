@@ -6,18 +6,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StreamUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 @Slf4j
-@Controller
+//@Controller
+@RestController
 public class JsonController {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -57,8 +58,31 @@ public class JsonController {
 
     // JSON 반환
     @ResponseBody
-    @PostMapping("/response-body-json")
-    public UserData responseBodyJson(@RequestBody UserData userData) {
+    @PostMapping("/response-body-json-v1")
+    public UserData responseBodyJsonV1(@RequestBody UserData userData) {
+        log.info("nickname={}, age={}", userData.getNickname(), userData.getAge());
+        return userData;
+    }
+
+    @ResponseBody
+    @PostMapping("/response-body-json-v2")
+    public HttpEntity<UserData> responseBodyJsonV2(@RequestBody UserData userData) {
+        log.info("nickname={}, age={}", userData.getNickname(), userData.getAge());
+        return new HttpEntity<>(userData);
+    }
+
+    // HttpStatus 지정
+    @ResponseBody
+    @PostMapping("/response-body-json-v3")
+    public ResponseEntity<UserData> responseBodyJsonV3(@RequestBody UserData userData) {
+        log.info("nickname={}, age={}", userData.getNickname(), userData.getAge());
+        return new ResponseEntity<>(userData, HttpStatus.BAD_REQUEST);
+    }
+
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @PostMapping("/response-body-json-v4")
+    public UserData responseBodyJsonV4(@RequestBody UserData userData) {
         log.info("nickname={}, age={}", userData.getNickname(), userData.getAge());
         return userData;
     }
