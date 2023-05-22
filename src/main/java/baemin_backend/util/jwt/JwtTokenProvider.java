@@ -67,11 +67,4 @@ public class JwtTokenProvider {
                 .getBody().getSubject();
     }
 
-    public long getUserId(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(JWT_SECRET_KEY).build()
-                .parseClaimsJws(token)
-                .getBody().get("userId", Long.class);
-    }
-
 }

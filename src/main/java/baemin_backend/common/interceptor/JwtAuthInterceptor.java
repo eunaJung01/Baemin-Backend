@@ -31,9 +31,9 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
         validateAccessToken(accessToken);
 
         String email = jwtTokenProvider.getPrincipal(accessToken);
-        long userId = jwtTokenProvider.getUserId(accessToken);
-        validatePayload(email, userId);
+        validatePayload(email);
 
+        long userId = userService.findUserIdByEmail(email);
         request.setAttribute("userId", userId);
         return true;
     }
@@ -59,13 +59,9 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
         }
     }
 
-    private void validatePayload(String email, long userId) {
-        if (email == null || userId == 0) {
+    private void validatePayload(String email) {
+        if (email == null) {
             throw new JwtInvalidTokenException(INVALID_TOKEN);
-        }
-        long userIdByEmail = userService.findUserIdByEmail(email);
-        if (userId != userIdByEmail) {
-            throw new JwtUnauthorizedTokenException(TOKEN_MISMATCH);
         }
     }
 
