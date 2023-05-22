@@ -29,8 +29,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("")
-    public BaseResponse<PostUserResponse> createUser(@Validated @RequestBody PostUserRequest postUserRequest, BindingResult bindingResult) {
-        log.info("[UserController.createUser]");
+    public BaseResponse<PostUserResponse> signUp(@Validated @RequestBody PostUserRequest postUserRequest, BindingResult bindingResult) {
+        log.info("[UserController.signUp]");
         if (bindingResult.hasErrors()) {
             throw new UserException(INVALID_USER_VALUE, getErrorMessages(bindingResult));
         }
