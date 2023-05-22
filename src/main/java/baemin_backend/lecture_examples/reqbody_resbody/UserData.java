@@ -1,12 +1,11 @@
 package baemin_backend.lecture_examples.reqbody_resbody;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserData {
 
     private String nickname;
