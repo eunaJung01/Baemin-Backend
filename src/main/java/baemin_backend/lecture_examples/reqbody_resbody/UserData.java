@@ -1,4 +1,4 @@
-package baemin_backend.lecture_examples;
+package baemin_backend.lecture_examples.reqbody_resbody;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -27,7 +27,7 @@ public enum BaseExceptionResponseStatus implements ResponseStatus {
     /**
      * 4000: Authorization 오류
      */
-    JWT_ERROR(4000, HttpStatus.INTERNAL_SERVER_ERROR.value(), "JWT에서 오류가 발생하였습니다."),
+    JWT_ERROR(4000, HttpStatus.UNAUTHORIZED.value(), "JWT에서 오류가 발생하였습니다."),
     TOKEN_NOT_FOUND(4001, HttpStatus.BAD_REQUEST.value(), "토큰이 HTTP Header에 없습니다."),
     UNSUPPORTED_TOKEN_TYPE(4002, HttpStatus.BAD_REQUEST.value(), "지원되지 않는 토큰 형식입니다."),
     INVALID_TOKEN(4003, HttpStatus.UNAUTHORIZED.value(), "유효하지 않은 토큰입니다."),
