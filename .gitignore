@@ -37,3 +37,4 @@ out/
 .vscode/
 
 /src/main/java/baemin_backend/config/secret
+*.pem
