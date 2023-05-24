@@ -70,4 +70,8 @@ public class UserService {
         }
     }
 
+    public void modifyUserStatus_dormant(long userId) {
+        userDao.modifyUserStatus_dormant(userId);
+    }
+
 }

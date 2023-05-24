@@ -56,4 +56,12 @@ public class UserDao {
         return jdbcTemplate.queryForObject(sql, param, String.class);
     }
 
+    public void modifyUserStatus_dormant(long userId) {
+        String sql = "update user set status=:status where user_id=:user_id";
+        Map<String, Object> param = Map.of(
+                "status", "dormant",
+                "user_id", userId);
+        jdbcTemplate.update(sql, param);
+    }
+
 }
