@@ -74,4 +74,11 @@ public class UserService {
         userDao.modifyUserStatus_dormant(userId);
     }
 
+    public void modifyNickname(long userId, String nickname) {
+        if (userDao.hasDuplicateNickName(nickname)) {
+            throw new UserException(DUPLICATE_NICKNAME);
+        }
+        userDao.modifyNickname(userId, nickname);
+    }
+
 }

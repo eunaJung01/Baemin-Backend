@@ -48,4 +48,15 @@ public class UserController {
         return new BaseResponse<>("userId=" + userId + " 휴면 처리 완료");
     }
 
+    @PatchMapping("/{userId}/nickname")
+    public BaseResponse<String> modifyNickname(@PathVariable long userId,
+                                               @Validated @RequestBody PatchNicknameRequest patchNicknameRequest, BindingResult bindingResult) {
+        log.info("[UserController.modifyNickname]");
+        if (bindingResult.hasErrors()) {
+            throw new UserException(INVALID_USER_VALUE, getErrorMessages(bindingResult));
+        }
+        userService.modifyNickname(userId, patchNicknameRequest.getNickname());
+        return new BaseResponse<>("userId=" + userId + " 닉네임 변경 완료");
+    }
+
 }
