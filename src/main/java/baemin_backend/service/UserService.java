@@ -1,5 +1,6 @@
 package baemin_backend.service;
 
+import baemin_backend.common.exception.DatabaseException;
 import baemin_backend.common.exception.UserException;
 import baemin_backend.dao.UserDao;
 import baemin_backend.dto.user.*;
@@ -22,16 +23,12 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
 
-    public PostUserResponse createUser(PostUserRequest postUserRequest) {
+    public PostUserResponse createUser(PostPutUserRequest postUserRequest) {
         log.info("[UserService.createUser]");
 
         // TODO: 1. validation (중복 검사)
-        if (userDao.hasDuplicateEmail(postUserRequest.getEmail())) {
-            throw new UserException(DUPLICATE_EMAIL);
-        }
-        if (userDao.hasDuplicateNickName(postUserRequest.getNickname())) {
-            throw new UserException(DUPLICATE_NICKNAME);
-        }
+        validateEmail(postUserRequest.getEmail());
+        validateNickname(postUserRequest.getNickname());
 
         // TODO: 2. password 암호화
         String encodedPassword = passwordEncoder.encode(postUserRequest.getPassword());
@@ -46,10 +43,6 @@ public class UserService {
         return new PostUserResponse(userId, jwt);
     }
 
-    public long findUserIdByEmail(String email) {
-        return userDao.findUserIdByEmail(email);
-    }
-
     public PostLoginResponse login(PostLoginRequest postLoginRequest, long userId) {
         log.info("[UserService.login]");
 
@@ -62,6 +55,36 @@ public class UserService {
         return new PostLoginResponse(userId, updatedJwt);
     }
 
+    public void modifyUserStatus_dormant(long userId) {
+        int affectedRows = userDao.modifyUserStatus_dormant(userId);
+        if (affectedRows != 1) {
+            throw new DatabaseException(DATABASE_ERROR);
+        }
+    }
+
+    public void modifyUserStatus_deleted(long userId) {
+        int affectedRows = userDao.modifyUserStatus_deleted(userId);
+        if (affectedRows != 1) {
+            throw new DatabaseException(DATABASE_ERROR);
+        }
+    }
+
+    public void modifyNickname(long userId, String nickname) {
+        validateNickname(nickname);
+        int affectedRows = userDao.modifyNickname(userId, nickname);
+        if (affectedRows != 1) {
+            throw new DatabaseException(DATABASE_ERROR);
+        }
+    }
+
+    public List<GetUserResponse> getUsers(String nickname, String email, String status) {
+        return userDao.getUsers(nickname, email, status);
+    }
+
+    public long findUserIdByEmail(String email) {
+        return userDao.findUserIdByEmail(email);
+    }
+
     private void validatePassword(String password, long userId) {
         String encodedPassword = userDao.getPasswordByUserId(userId);
         if (!passwordEncoder.matches(password, encodedPassword)) {
@@ -69,24 +92,16 @@ public class UserService {
         }
     }
 
-    public void modifyUserStatus_dormant(long userId) {
-        userDao.modifyUserStatus_dormant(userId);
+    private void validateEmail(String email) {
+        if (userDao.hasDuplicateEmail(email)) {
+            throw new UserException(DUPLICATE_EMAIL);
+        }
     }
 
-    public void modifyUserStatus_deleted(long userId) {
-        userDao.modifyUserStatus_deleted(userId);
-    }
-
-
-    public void modifyNickname(long userId, String nickname) {
+    private void validateNickname(String nickname) {
         if (userDao.hasDuplicateNickName(nickname)) {
             throw new UserException(DUPLICATE_NICKNAME);
         }
-        userDao.modifyNickname(userId, nickname);
-    }
-
-    public List<GetUserResponse> getUsers(String nickname, String email, String status) {
-        return userDao.getUsers(nickname, email, status);
     }
 
 }

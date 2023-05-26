@@ -1,9 +1,8 @@
 package baemin_backend.dao;
 
 import baemin_backend.dto.user.GetUserResponse;
-import baemin_backend.dto.user.PostUserRequest;
+import baemin_backend.dto.user.PostPutUserRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -38,7 +37,7 @@ public class UserDao {
         return Boolean.TRUE.equals(jdbcTemplate.queryForObject(sql, param, boolean.class));
     }
 
-    public long createUser(PostUserRequest postUserRequest) {
+    public long createUser(PostPutUserRequest postUserRequest) {
         String sql = "insert into user(email, password, phone_number, nickname, profile_image) " +
                 "values(:email, :password, :phoneNumber, :nickname, :profileImage)";
 
@@ -61,28 +60,28 @@ public class UserDao {
         return jdbcTemplate.queryForObject(sql, param, String.class);
     }
 
-    public void modifyUserStatus_dormant(long userId) {
+    public int modifyUserStatus_dormant(long userId) {
         String sql = "update user set status=:status where user_id=:user_id";
         Map<String, Object> param = Map.of(
                 "status", "dormant",
                 "user_id", userId);
-        jdbcTemplate.update(sql, param);
+        return jdbcTemplate.update(sql, param);
     }
 
-    public void modifyUserStatus_deleted(long userId) {
+    public int modifyUserStatus_deleted(long userId) {
         String sql = "update user set status=:status where user_id=:user_id";
         Map<String, Object> param = Map.of(
                 "status", "deleted",
                 "user_id", userId);
-        jdbcTemplate.update(sql, param);
+        return jdbcTemplate.update(sql, param);
     }
 
-    public void modifyNickname(long userId, String nickname) {
+    public int modifyNickname(long userId, String nickname) {
         String sql = "update user set nickname=:nickname where user_id=:user_id";
         Map<String, Object> param = Map.of(
                 "nickname", nickname,
                 "user_id", userId);
-        jdbcTemplate.update(sql, param);
+        return jdbcTemplate.update(sql, param);
     }
 
     public List<GetUserResponse> getUsers(String nickname, String email, String status) {

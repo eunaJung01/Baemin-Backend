@@ -1,11 +1,10 @@
 package baemin_backend.dao;
 
-import baemin_backend.dto.user.PostUserRequest;
+import baemin_backend.dto.user.PostPutUserRequest;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
-import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.Map;
@@ -35,7 +34,7 @@ public class UserDaoV3 {
         return Boolean.TRUE.equals(jdbcTemplate.queryForObject(sql, param, boolean.class));
     }
 
-    public long createUserV3(PostUserRequest postUserRequest) {
+    public long createUserV3(PostPutUserRequest postUserRequest) {
         SqlParameterSource param = new BeanPropertySqlParameterSource(postUserRequest);
         Number key = jdbcInsert.executeAndReturnKey(param);
         return key.longValue();

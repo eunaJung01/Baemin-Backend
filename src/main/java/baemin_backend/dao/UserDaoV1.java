@@ -1,10 +1,9 @@
 package baemin_backend.dao;
 
-import baemin_backend.dto.user.PostUserRequest;
+import baemin_backend.dto.user.PostPutUserRequest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
@@ -29,7 +28,7 @@ public class UserDaoV1 {
         return Boolean.TRUE.equals(jdbcTemplate.queryForObject(sql, boolean.class, nickname));
     }
 
-    public long createUserV1(PostUserRequest postUserRequest) {
+    public long createUserV1(PostPutUserRequest postUserRequest) {
         String sql = "insert into user(email, password, phone_number, nickname, profile_image) values(?,?,?,?,?)";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();

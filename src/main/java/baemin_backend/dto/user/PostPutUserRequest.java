@@ -12,7 +12,7 @@ import org.springframework.lang.Nullable;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PostUserRequest {
+public class PostPutUserRequest {
 
     @Email(message = "email: 이메일 형식이어야 합니다")
     @NotBlank(message = "email: {NotBlank}")
