@@ -45,17 +45,17 @@ public class UserController {
     }
 
     @PatchMapping("/{userId}/dormant")
-    public BaseResponse<String> modifyUserStatus_dormant(@PathVariable long userId) {
+    public BaseResponse<Object> modifyUserStatus_dormant(@PathVariable long userId) {
         log.info("[UserController.modifyUserStatus_dormant]");
         userService.modifyUserStatus_dormant(userId);
-        return new BaseResponse<>("userId=" + userId + " 휴면 처리 완료");
+        return new BaseResponse<>(null);
     }
 
     @PatchMapping("/{userId}/deleted")
-    public BaseResponse<String> modifyUserStatus_deleted(@PathVariable long userId) {
+    public BaseResponse<Object> modifyUserStatus_deleted(@PathVariable long userId) {
         log.info("[UserController.modifyUserStatus_delete]");
         userService.modifyUserStatus_deleted(userId);
-        return new BaseResponse<>("userId=" + userId + " 탈퇴 처리 완료");
+        return new BaseResponse<>(null);
     }
 
     @PatchMapping("/{userId}/nickname")
@@ -66,7 +66,7 @@ public class UserController {
             throw new UserException(INVALID_USER_VALUE, getErrorMessages(bindingResult));
         }
         userService.modifyNickname(userId, patchNicknameRequest.getNickname());
-        return new BaseResponse<>("userId=" + userId + " 닉네임 변경 완료");
+        return new BaseResponse<>(null);
     }
 
     @GetMapping("")
