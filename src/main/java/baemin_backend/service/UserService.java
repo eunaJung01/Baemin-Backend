@@ -81,8 +81,8 @@ public class UserService {
         return userDao.getUsers(nickname, email, status);
     }
 
-    public long findUserIdByEmail(String email) {
-        return userDao.findUserIdByEmail(email);
+    public long getUserIdByEmail(String email) {
+        return userDao.getUserIdByEmail(email);
     }
 
     private void validatePassword(String password, long userId) {

@@ -48,18 +48,6 @@ public class UserDao {
         return Objects.requireNonNull(keyHolder.getKey()).longValue();
     }
 
-    public long findUserIdByEmail(String email) {
-        String sql = "select user_id from user where email=:email and status='active'";
-        Map<String, Object> param = Map.of("email", email);
-        return jdbcTemplate.queryForObject(sql, param, long.class);
-    }
-
-    public String getPasswordByUserId(long userId) {
-        String sql = "select password from user where user_id=:user_id and status='active'";
-        Map<String, Object> param = Map.of("user_id", userId);
-        return jdbcTemplate.queryForObject(sql, param, String.class);
-    }
-
     public int modifyUserStatus_dormant(long userId) {
         String sql = "update user set status=:status where user_id=:user_id";
         Map<String, Object> param = Map.of(
@@ -101,6 +89,18 @@ public class UserDao {
                         rs.getString("profile_image"),
                         rs.getString("status"))
         );
+    }
+
+    public long getUserIdByEmail(String email) {
+        String sql = "select user_id from user where email=:email and status='active'";
+        Map<String, Object> param = Map.of("email", email);
+        return jdbcTemplate.queryForObject(sql, param, long.class);
+    }
+
+    public String getPasswordByUserId(long userId) {
+        String sql = "select password from user where user_id=:user_id and status='active'";
+        Map<String, Object> param = Map.of("user_id", userId);
+        return jdbcTemplate.queryForObject(sql, param, String.class);
     }
 
 }
