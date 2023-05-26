@@ -69,6 +69,14 @@ public class UserDao {
         jdbcTemplate.update(sql, param);
     }
 
+    public void modifyUserStatus_deleted(long userId) {
+        String sql = "update user set status=:status where user_id=:user_id";
+        Map<String, Object> param = Map.of(
+                "status", "deleted",
+                "user_id", userId);
+        jdbcTemplate.update(sql, param);
+    }
+
     public void modifyNickname(long userId, String nickname) {
         String sql = "update user set nickname=:nickname where user_id=:user_id";
         Map<String, Object> param = Map.of(

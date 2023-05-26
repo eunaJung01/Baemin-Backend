@@ -51,6 +51,13 @@ public class UserController {
         return new BaseResponse<>("userId=" + userId + " 휴면 처리 완료");
     }
 
+    @PatchMapping("/{userId}/deleted")
+    public BaseResponse<String> modifyUserStatus_deleted(@PathVariable long userId) {
+        log.info("[UserController.modifyUserStatus_delete]");
+        userService.modifyUserStatus_deleted(userId);
+        return new BaseResponse<>("userId=" + userId + " 탈퇴 처리 완료");
+    }
+
     @PatchMapping("/{userId}/nickname")
     public BaseResponse<String> modifyNickname(@PathVariable long userId,
                                                @Validated @RequestBody PatchNicknameRequest patchNicknameRequest, BindingResult bindingResult) {
