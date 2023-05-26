@@ -1,6 +1,9 @@
 package baemin_backend.dao;
 
+import baemin_backend.dto.user.GetUserResponse;
 import baemin_backend.dto.user.PostUserRequest;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -9,9 +12,11 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+@Slf4j
 @Repository
 public class UserDao {
 
@@ -70,6 +75,25 @@ public class UserDao {
                 "nickname", nickname,
                 "user_id", userId);
         jdbcTemplate.update(sql, param);
+    }
+
+    public List<GetUserResponse> getUsers(String nickname, String email, String status) {
+        String sql = "select email, phone_number, nickname, profile_image, status from user " +
+                "where nickname like :nickname and email like :email and status=:status";
+
+        Map<String, Object> param = Map.of(
+                "nickname", "%" + nickname + "%",
+                "email", "%" + email + "%",
+                "status", status);
+
+        return jdbcTemplate.query(sql, param,
+                (rs, rowNum) -> new GetUserResponse(
+                        rs.getString("email"),
+                        rs.getString("phone_number"),
+                        rs.getString("nickname"),
+                        rs.getString("profile_image"),
+                        rs.getString("status"))
+        );
     }
 
 }

@@ -2,15 +2,14 @@ package baemin_backend.service;
 
 import baemin_backend.common.exception.UserException;
 import baemin_backend.dao.UserDao;
-import baemin_backend.dto.user.PostLoginRequest;
-import baemin_backend.dto.user.PostLoginResponse;
-import baemin_backend.dto.user.PostUserRequest;
-import baemin_backend.dto.user.PostUserResponse;
+import baemin_backend.dto.user.*;
 import baemin_backend.util.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 import static baemin_backend.common.response.status.BaseExceptionResponseStatus.*;
 
@@ -79,6 +78,10 @@ public class UserService {
             throw new UserException(DUPLICATE_NICKNAME);
         }
         userDao.modifyNickname(userId, nickname);
+    }
+
+    public List<GetUserResponse> getUsers(String nickname, String email, String status) {
+        return userDao.getUsers(nickname, email, status);
     }
 
 }

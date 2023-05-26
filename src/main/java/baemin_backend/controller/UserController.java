@@ -11,6 +11,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+import static baemin_backend.common.response.status.BaseExceptionResponseStatus.INVALID_USER_STATUS;
 import static baemin_backend.common.response.status.BaseExceptionResponseStatus.INVALID_USER_VALUE;
 import static baemin_backend.util.BindingResultUtils.getErrorMessages;
 
@@ -57,6 +60,18 @@ public class UserController {
         }
         userService.modifyNickname(userId, patchNicknameRequest.getNickname());
         return new BaseResponse<>("userId=" + userId + " 닉네임 변경 완료");
+    }
+
+    @GetMapping("")
+    public BaseResponse<List<GetUserResponse>> getUsers(
+            @RequestParam(required = false, defaultValue = "") String nickname,
+            @RequestParam(required = false, defaultValue = "") String email,
+            @RequestParam(required = false, defaultValue = "active") String status) {
+        log.info("[UserController.getUsers]");
+        if (!status.equals("active") && !status.equals("dormant") && !status.equals("deleted")) {
+            throw new UserException(INVALID_USER_STATUS);
+        }
+        return new BaseResponse<>(userService.getUsers(nickname, email, status));
     }
 
 }
