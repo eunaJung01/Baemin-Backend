@@ -28,7 +28,10 @@ public class UserService {
 
         // TODO: 1. validation (중복 검사)
         validateEmail(postUserRequest.getEmail());
-        validateNickname(postUserRequest.getNickname());
+        String nickname = postUserRequest.getNickname();
+        if (nickname != null) {
+            validateNickname(postUserRequest.getNickname());
+        }
 
         // TODO: 2. password 암호화
         String encodedPassword = passwordEncoder.encode(postUserRequest.getPassword());
