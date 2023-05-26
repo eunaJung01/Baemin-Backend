@@ -25,6 +25,9 @@ public class UserController {
 
     private final UserService userService;
 
+    /**
+     * 회원 가입
+     */
     @PostMapping("")
     public BaseResponse<PostUserResponse> signUp(@Validated @RequestBody PostPutUserRequest postUserRequest, BindingResult bindingResult) {
         log.info("[UserController.signUp]");
@@ -34,6 +37,9 @@ public class UserController {
         return new BaseResponse<>(userService.createUser(postUserRequest));
     }
 
+    /**
+     * 로그인
+     */
     @PostMapping("/login")
     public BaseResponse<PostLoginResponse> login(@Validated @RequestBody PostLoginRequest postLoginRequest, BindingResult bindingResult,
                                                  @PreAuthorize long userId) {
@@ -44,6 +50,9 @@ public class UserController {
         return new BaseResponse<>(userService.login(postLoginRequest, userId));
     }
 
+    /**
+     * 회원 휴면
+     */
     @PatchMapping("/{userId}/dormant")
     public BaseResponse<Object> modifyUserStatus_dormant(@PathVariable long userId) {
         log.info("[UserController.modifyUserStatus_dormant]");
@@ -51,6 +60,9 @@ public class UserController {
         return new BaseResponse<>(null);
     }
 
+    /**
+     * 회원 탈퇴
+     */
     @PatchMapping("/{userId}/deleted")
     public BaseResponse<Object> modifyUserStatus_deleted(@PathVariable long userId) {
         log.info("[UserController.modifyUserStatus_delete]");
@@ -58,6 +70,9 @@ public class UserController {
         return new BaseResponse<>(null);
     }
 
+    /**
+     * 닉네임 변경
+     */
     @PatchMapping("/{userId}/nickname")
     public BaseResponse<String> modifyNickname(@PathVariable long userId,
                                                @Validated @RequestBody PatchNicknameRequest patchNicknameRequest, BindingResult bindingResult) {
@@ -69,6 +84,9 @@ public class UserController {
         return new BaseResponse<>(null);
     }
 
+    /**
+     * 회원 목록 조회
+     */
     @GetMapping("")
     public BaseResponse<List<GetUserResponse>> getUsers(
             @RequestParam(required = false, defaultValue = "") String nickname,
