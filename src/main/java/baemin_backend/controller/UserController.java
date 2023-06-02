@@ -1,6 +1,5 @@
 package baemin_backend.controller;
 
-import baemin_backend.common.argument_resolver.PreAuthorize;
 import baemin_backend.common.exception.UserException;
 import baemin_backend.common.response.BaseResponse;
 import baemin_backend.dto.user.*;
@@ -13,8 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static baemin_backend.common.response.status.BaseExceptionResponseStatus.INVALID_USER_STATUS;
-import static baemin_backend.common.response.status.BaseExceptionResponseStatus.INVALID_USER_VALUE;
+import static baemin_backend.common.response.status.BaseExceptionResponseStatus.*;
 import static baemin_backend.util.BindingResultUtils.getErrorMessages;
 
 @Slf4j
@@ -35,19 +33,6 @@ public class UserController {
             throw new UserException(INVALID_USER_VALUE, getErrorMessages(bindingResult));
         }
         return new BaseResponse<>(userService.createUser(postUserRequest));
-    }
-
-    /**
-     * 로그인
-     */
-    @PostMapping("/login")
-    public BaseResponse<PostLoginResponse> login(@Validated @RequestBody PostLoginRequest postLoginRequest, BindingResult bindingResult,
-                                                 @PreAuthorize long userId) {
-        log.info("[UserController.login] userId={}", userId);
-        if (bindingResult.hasErrors()) {
-            throw new UserException(INVALID_USER_VALUE, getErrorMessages(bindingResult));
-        }
-        return new BaseResponse<>(userService.login(postLoginRequest, userId));
     }
 
     /**

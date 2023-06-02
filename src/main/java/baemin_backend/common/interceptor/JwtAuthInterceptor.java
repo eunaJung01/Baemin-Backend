@@ -1,7 +1,7 @@
 package baemin_backend.common.interceptor;
 
 import baemin_backend.common.exception.jwt.*;
-import baemin_backend.service.UserService;
+import baemin_backend.service.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
     private static final String JWT_TOKEN_PREFIX = "Bearer ";
 
     private final JwtTokenProvider jwtTokenProvider;
-    private final UserService userService;
+    private final AuthService authService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -32,8 +32,9 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
 
         String email = jwtTokenProvider.getPrincipal(accessToken);
         validatePayload(email);
+        request.setAttribute("email", email);
 
-        long userId = userService.getUserIdByEmail(email);
+        long userId = authService.getUserIdByEmail(email);
         request.setAttribute("userId", userId);
         return true;
     }

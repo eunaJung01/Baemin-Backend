@@ -1,4 +1,4 @@
-package baemin_backend.dto.user;
+package baemin_backend.dto.auth;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PostLoginRequest {
+public class LoginRequest {
 
     @NotBlank(message = "email: {NotBlank}")
     private String email;
