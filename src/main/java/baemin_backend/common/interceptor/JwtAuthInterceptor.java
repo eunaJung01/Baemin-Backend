@@ -32,7 +32,6 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
 
         String email = jwtTokenProvider.getPrincipal(accessToken);
         validatePayload(email);
-        request.setAttribute("email", email);
 
         long userId = authService.getUserIdByEmail(email);
         request.setAttribute("userId", userId);
