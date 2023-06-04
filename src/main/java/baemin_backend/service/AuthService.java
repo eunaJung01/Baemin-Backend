@@ -24,14 +24,17 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
 
-    public LoginResponse login(LoginRequest authRequest, long userId) {
+    public LoginResponse login(LoginRequest authRequest) {
         log.info("[AuthService.login]");
+
+        String email = authRequest.getEmail();
+        long userId = userDao.getUserIdByEmail(email);
 
         // TODO: 1. 비밀번호 일치 확인
         validatePassword(authRequest.getPassword(), userId);
 
         // TODO: 2. JWT 갱신
-        String updatedJwt = jwtTokenProvider.createToken(authRequest.getEmail(), userId);
+        String updatedJwt = jwtTokenProvider.createToken(email, userId);
 
         return new LoginResponse(userId, updatedJwt);
     }

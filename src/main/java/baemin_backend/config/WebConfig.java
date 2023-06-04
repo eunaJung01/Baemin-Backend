@@ -17,12 +17,12 @@ public class WebConfig implements WebMvcConfigurer {
     private final JwtAuthInterceptor jwtAuthenticationInterceptor;
     private final JwtAuthHandlerArgumentResolver jwtAuthHandlerArgumentResolver;
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(jwtAuthenticationInterceptor)
-                .order(1)
-                .addPathPatterns("/auth/login");
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(jwtAuthenticationInterceptor)
+//                .order(1)
+//                .addPathPatterns();
+//    }
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
