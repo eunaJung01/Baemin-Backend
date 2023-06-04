@@ -1,6 +1,7 @@
 package baemin_backend.common.exception_handler;
 
-import baemin_backend.common.exception.jwt.*;
+import baemin_backend.common.exception.jwt.bad_request.JwtBadRequestException;
+import baemin_backend.common.exception.jwt.unauthorized.JwtUnauthorizedTokenException;
 import baemin_backend.common.response.BaseErrorResponse;
 import jakarta.annotation.Priority;
 import lombok.extern.slf4j.Slf4j;
@@ -15,8 +16,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class JwtExceptionControllerAdvice {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({JwtNoTokenException.class, JwtUnsupportedTokenException.class})
-    public BaseErrorResponse handle_JwtBadRequestException(JwtNoTokenException e) {
+    @ExceptionHandler(JwtBadRequestException.class)
+    public BaseErrorResponse handle_JwtBadRequestException(JwtBadRequestException e) {
         log.error("[handle_JwtBadRequestException]", e);
         return new BaseErrorResponse(e.getExceptionStatus());
     }

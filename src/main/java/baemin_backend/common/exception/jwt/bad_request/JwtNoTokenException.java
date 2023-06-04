@@ -1,15 +1,15 @@
-package baemin_backend.common.exception.jwt;
+package baemin_backend.common.exception.jwt.bad_request;
 
 import baemin_backend.common.response.status.ResponseStatus;
 import lombok.Getter;
 
 @Getter
-public class JwtNoTokenException extends RuntimeException {
+public class JwtNoTokenException extends JwtBadRequestException {
 
     private final ResponseStatus exceptionStatus;
 
     public JwtNoTokenException(ResponseStatus exceptionStatus) {
-        super(exceptionStatus.getMessage());
+        super(exceptionStatus);
         this.exceptionStatus = exceptionStatus;
     }
 

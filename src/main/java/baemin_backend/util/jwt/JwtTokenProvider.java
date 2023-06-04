@@ -1,8 +1,8 @@
 package baemin_backend.util.jwt;
 
-import baemin_backend.common.exception.jwt.JwtInvalidTokenException;
-import baemin_backend.common.exception.jwt.JwtMalformedTokenException;
-import baemin_backend.common.exception.jwt.JwtUnsupportedTokenException;
+import baemin_backend.common.exception.jwt.bad_request.JwtUnsupportedTokenException;
+import baemin_backend.common.exception.jwt.unauthorized.JwtInvalidTokenException;
+import baemin_backend.common.exception.jwt.unauthorized.JwtMalformedTokenException;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,7 +38,7 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    public boolean isExpiredToken(String token) {
+    public boolean isExpiredToken(String token) throws JwtInvalidTokenException {
         try {
             Jws<Claims> claims = Jwts.parserBuilder()
                     .setSigningKey(JWT_SECRET_KEY).build()

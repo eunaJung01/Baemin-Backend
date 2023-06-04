@@ -1,4 +1,4 @@
-package baemin_backend.common.exception.jwt;
+package baemin_backend.common.exception.jwt.unauthorized;
 
 import baemin_backend.common.response.status.ResponseStatus;
 import lombok.Getter;

@@ -1,14 +1,14 @@
-package baemin_backend.common.exception.jwt;
+package baemin_backend.common.exception.jwt.unauthorized;
 
 import baemin_backend.common.response.status.ResponseStatus;
 import lombok.Getter;
 
 @Getter
-public class JwtExpiredTokenException extends JwtUnauthorizedTokenException {
+public class JwtMalformedTokenException extends JwtUnauthorizedTokenException {
 
     private final ResponseStatus exceptionStatus;
 
-    public JwtExpiredTokenException(ResponseStatus exceptionStatus) {
+    public JwtMalformedTokenException(ResponseStatus exceptionStatus) {
         super(exceptionStatus);
         this.exceptionStatus = exceptionStatus;
     }

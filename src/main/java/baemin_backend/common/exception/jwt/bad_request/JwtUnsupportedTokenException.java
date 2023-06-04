@@ -1,14 +1,14 @@
-package baemin_backend.common.exception.jwt;
+package baemin_backend.common.exception.jwt.bad_request;
 
 import baemin_backend.common.response.status.ResponseStatus;
 import lombok.Getter;
 
 @Getter
-public class JwtMalformedTokenException extends JwtUnauthorizedTokenException {
+public class JwtUnsupportedTokenException extends JwtBadRequestException {
 
     private final ResponseStatus exceptionStatus;
 
-    public JwtMalformedTokenException(ResponseStatus exceptionStatus) {
+    public JwtUnsupportedTokenException(ResponseStatus exceptionStatus) {
         super(exceptionStatus);
         this.exceptionStatus = exceptionStatus;
     }

@@ -1,7 +1,7 @@
 package baemin_backend.service;
 
 import baemin_backend.common.exception.UserException;
-import baemin_backend.common.exception.jwt.JwtAuthFailedException;
+import baemin_backend.common.exception.jwt.unauthorized.JwtUnauthorizedTokenException;
 import baemin_backend.dao.UserDao;
 import baemin_backend.dto.auth.LoginRequest;
 import baemin_backend.dto.auth.LoginResponse;
@@ -50,7 +50,7 @@ public class AuthService {
         try {
             return userDao.getUserIdByEmail(email);
         } catch (IncorrectResultSizeDataAccessException e) {
-            throw new JwtAuthFailedException(TOKEN_MISMATCH);
+            throw new JwtUnauthorizedTokenException(TOKEN_MISMATCH);
         }
     }
 
