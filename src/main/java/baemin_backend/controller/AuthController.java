@@ -35,6 +35,9 @@ public class AuthController {
         return new BaseResponse<>(authService.login(authRequest));
     }
 
+    /**
+     * 인가(JWT 검증) 테스트
+     */
     @GetMapping("")
     public BaseResponse<String> checkAuthorization(@PreAuthorize long userId) {
         log.info("[AuthController.checkAuthorization]");

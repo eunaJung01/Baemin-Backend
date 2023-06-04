@@ -2,7 +2,6 @@ package baemin_backend.common.exception_handler;
 
 import baemin_backend.common.exception.jwt.*;
 import baemin_backend.common.response.BaseErrorResponse;
-import io.jsonwebtoken.JwtException;
 import jakarta.annotation.Priority;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -23,7 +22,7 @@ public class JwtExceptionControllerAdvice {
     }
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @ExceptionHandler({JwtExpiredTokenException.class, JwtInvalidTokenException.class, JwtMalformedTokenException.class, JwtUnauthorizedTokenException.class, JwtException.class})
+    @ExceptionHandler(JwtUnauthorizedTokenException.class)
     public BaseErrorResponse handle_JwtUnauthorizedException(JwtUnauthorizedTokenException e) {
         log.error("[handle_JwtUnauthorizedException]", e);
         return new BaseErrorResponse(e.getExceptionStatus());
